@@ -1,0 +1,19 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - run: flutter build apk
+    - run: flutter build ios
+    - name: Flutter action
+      uses: subosito/flutter-action@v1.1.1
+      with:
+        # The Flutter version to make available on the path
+        flutter-version: 'v1.12.13+hotfix.5'
+        channel: 'stable'
