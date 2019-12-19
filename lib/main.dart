@@ -26,8 +26,8 @@ class HomePage extends StatelessWidget {
             "Hello world!",
             style: GoogleFonts.pacifico(
               textStyle: TextStyle(
-                color: Colors.blueAccent,
-                fontSize: 22,
+                color: Colors.redAccent,
+                fontSize: 44,
               ),
             ),
           ),
