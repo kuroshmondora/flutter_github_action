@@ -1,17 +1,21 @@
-name: CI
-
-on: [push]
+name: Test, Build and Release apk
+on: push
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    name: Build APK
     steps:
       - uses: actions/checkout@v1
-      - run: flutter build apk
       - name: Flutter action
         uses: subosito/flutter-action@v1.1.1
         with:
-          # The Flutter version to make available on the path
           flutter-version: "v1.12.13+hotfix.5"
           channel: "stable"
+      - run: flutter pub get
+      - run: flutter test
+      - run: flutter build apk --debug --split-per-abi
+      - name: Create a Release APK
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/app/outputs/apk/debug/*.apk"
